@@ -1,6 +1,6 @@
 {
   "name": "generator-jekyll-post",
-  "version": "0.0.0",
+  "version": "1.0.0-0",
   "description": "Generates a new blank Jekyll post",
   "homepage": "",
   "author": {
@@ -65,7 +65,6 @@
       "jest": true,
       "node": true
     },
-
     "plugins": [
       "prettier"
     ]
