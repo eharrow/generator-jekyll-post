@@ -73,6 +73,5 @@
     "pretest": "eslint .",
     "test": "jest"
   },
-  "repository": "eharrow/generator-jekyll-post",
-  "private": true
+  "repository": "eharrow/generator-jekyll-post"
 }

@@ -10,7 +10,7 @@ npm install -g yo
 npm install -g generator-jekyll-post
 ```
 
-Then generate your new project:
+Then generate your new jekyll post md file which will be created in the current directory so you'll need to move it to _posts afterwards:
 
 ```bash
 yo jekyll-post

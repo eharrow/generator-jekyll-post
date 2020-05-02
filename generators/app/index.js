@@ -4,6 +4,10 @@ const chalk = require("chalk");
 const yosay = require("yosay");
 const moment = require("moment");
 
+/**
+ * This generator prompts for the minimum metadata that a jekyll post requires before passing through
+ * ejs and the markdown template.
+ */
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
@@ -38,7 +42,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.log("post title", this.props.title);
+    // this.log("post title", this.props.title);
 
     const toKebabCase = str =>
       str &&
