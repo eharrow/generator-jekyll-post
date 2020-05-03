@@ -9,6 +9,10 @@ const moment = require("moment");
  * ejs and the markdown template.
  */
 module.exports = class extends Generator {
+  initializing() {
+    this.env.adapter.promptModule.registerPrompt("datetime", require("inquirer-datepicker-prompt"));
+  }
+
   prompting() {
     // Have Yeoman greet the user.
     this.log(
@@ -32,6 +36,12 @@ module.exports = class extends Generator {
         name: "comments",
         message: "Would you like to enable comments?",
         default: false
+      },
+      {
+        type: "datetime",
+        name: "date",
+        message: 'Pick the post date',
+        format: ['yyyy', '-', 'mm', '-', 'dd']
       }
     ];
 
@@ -67,7 +77,7 @@ module.exports = class extends Generator {
         .join(' ');
 
     const kebabTags = CSVToArray(this.props.tags)[0].map((item) => toKebabCase(item)).reduce(CSVToString);
-    const kebabDate = moment(new Date()).format("YYYY-MM-DD");
+    const kebabDate = moment(this.props.date).format("YYYY-MM-DD");
     const kebabPostTitle = toKebabCase(this.props.title);
     const title = toTitleCase(this.props.title);
 
