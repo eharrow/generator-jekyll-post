@@ -1,9 +1,0 @@
-{
-  "generator-node": {
-    "promptValues": {
-      "authorName": "Ewan Harrow",
-      "authorEmail": "ewan@harrow.org",
-      "authorUrl": "ewanharrow.com"
-    }
-  }
-}
