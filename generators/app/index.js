@@ -42,7 +42,13 @@ module.exports = class extends Generator {
         name: "date",
         message: 'Pick the post date',
         format: ['yyyy', '-', 'mm', '-', 'dd']
-      }
+      },
+      {
+        type: "confirm",
+        name: "copy",
+        message: "Would you like to generate the file in the jekyll _posts directory?",
+        default: false
+      },
     ];
 
     return this.prompt(prompts).then(props => {
@@ -80,10 +86,11 @@ module.exports = class extends Generator {
     const kebabDate = moment(this.props.date).format("YYYY-MM-DD");
     const kebabPostTitle = toKebabCase(this.props.title);
     const title = toTitleCase(this.props.title);
+    const path = this.props.copy ? "_posts/" : "";
 
     this.fs.copyTpl(
       this.templatePath("template-post.md"),
-      this.destinationPath(`${kebabDate}-${kebabPostTitle}.md`),
+      this.destinationPath(`${path}${kebabDate}-${kebabPostTitle}.md`),
       {
         title: title,
         tags: kebabTags,
