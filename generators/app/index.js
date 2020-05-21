@@ -3,6 +3,7 @@ const Generator = require("yeoman-generator");
 const chalk = require("chalk");
 const yosay = require("yosay");
 const moment = require("moment");
+const path = require("path");
 
 /**
  * This generator prompts for the minimum metadata that a jekyll post requires before passing through
@@ -44,10 +45,11 @@ module.exports = class extends Generator {
         format: ['yyyy', '-', 'mm', '-', 'dd']
       },
       {
-        type: "confirm",
+        type: "list",
         name: "copy",
-        message: "Would you like to generate the file in the jekyll _posts directory?",
-        default: false
+        message: "Would you like to generate the file in the following directory?",
+        choices: ["_drafts", "_posts", "drop it here"],
+        default: "_drafts"
       },
     ];
 
@@ -86,11 +88,11 @@ module.exports = class extends Generator {
     const kebabDate = moment(this.props.date).format("YYYY-MM-DD");
     const kebabPostTitle = toKebabCase(this.props.title);
     const title = toTitleCase(this.props.title);
-    const path = this.props.copy ? "_posts/" : "";
+    const dir = this.props.copy === "drop it here" ? "" : this.props.copy + path.sep;
 
     this.fs.copyTpl(
       this.templatePath("template-post.md"),
-      this.destinationPath(`${path}${kebabDate}-${kebabPostTitle}.md`),
+      this.destinationPath(`${dir}${kebabDate}-${kebabPostTitle}.md`),
       {
         title: title,
         tags: kebabTags,
