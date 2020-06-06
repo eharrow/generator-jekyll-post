@@ -15,6 +15,7 @@ Then generate your new jekyll post md file which will be created in the current 
 ```bash
 yo jekyll-post
 ```
+![jekyll post yeoman generator screenshot](Screenshot.png)
 
 ## Getting To Know Yeoman
 
