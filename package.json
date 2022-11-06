@@ -35,7 +35,7 @@
   "dependencies": {
     "chalk": "^2.1.0",
     "inquirer-datepicker-prompt": "^0.4.2",
-    "moment": "^2.25.1",
+    "moment": "^2.29.4",
     "yeoman-generator": "^2.0.1",
     "yosay": "^2.0.1"
   },
