@@ -60,8 +60,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    // this.log("post title", this.props.title);
-    const CSVToArray = (data, delimiter = ',', omitFirstRow = false) =>
+    const csvToArray = (data, delimiter = ',', omitFirstRow = false) =>
       data
         .slice(omitFirstRow ? data.indexOf('\n') + 1 : 0)
         .split('\n')
@@ -84,7 +83,7 @@ module.exports = class extends Generator {
         .map(x => x.charAt(0).toUpperCase() + x.slice(1))
         .join(' ');
 
-    const kebabTags = CSVToArray(this.props.tags)[0].map((item) => toKebabCase(item)).reduce(CSVToString);
+    const kebabTags = csvToArray(this.props.tags)[0].map((item) => toKebabCase(item)).reduce(CSVToString);
     const kebabDate = moment(this.props.date).format("YYYY-MM-DD");
     const kebabPostTitle = toKebabCase(this.props.title);
     const title = toTitleCase(this.props.title);
@@ -102,6 +101,5 @@ module.exports = class extends Generator {
   }
 
   install() {
-    //this.installDependencies();
   }
 };
