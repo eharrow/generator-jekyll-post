@@ -14,7 +14,7 @@ module.exports = class extends Generator {
     this.env.adapter.promptModule.registerPrompt("datetime", require("inquirer-datepicker-prompt"));
   }
 
-  prompting() {
+  async prompting() {
     // Have Yeoman greet the user.
     this.log(
       yosay(`Welcome to the spectacular ${chalk.red("generator-jekyll-post")} generator!`)
@@ -53,19 +53,17 @@ module.exports = class extends Generator {
       },
     ];
 
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
-    });
+    this.answers  = await this.prompt(prompts);
   }
 
   writing() {
+    this.log("post title", this.answers.title);
     const csvToArray = (data, delimiter = ',', omitFirstRow = false) =>
       data
         .slice(omitFirstRow ? data.indexOf('\n') + 1 : 0)
         .split('\n')
         .map(v => v.split(delimiter));
-    
+
     const toKebabCase = str =>
       str &&
       str
@@ -83,11 +81,11 @@ module.exports = class extends Generator {
         .map(x => x.charAt(0).toUpperCase() + x.slice(1))
         .join(' ');
 
-    const kebabTags = csvToArray(this.props.tags)[0].map((item) => toKebabCase(item)).reduce(CSVToString);
-    const kebabDate = moment(this.props.date).format("YYYY-MM-DD");
-    const kebabPostTitle = toKebabCase(this.props.title);
-    const title = toTitleCase(this.props.title);
-    const dir = this.props.copy === "drop it here" ? "" : this.props.copy + path.sep;
+    const kebabTags = csvToArray(this.answers.tags)[0].map((item) => toKebabCase(item)).reduce(CSVToString);
+    const kebabDate = moment(this.answers.date).format("YYYY-MM-DD");
+    const kebabPostTitle = toKebabCase(this.answers.title);
+    const title = toTitleCase(this.answers.title);
+    const dir = this.answers.copy === "drop it here" ? "" : this.answers.copy + path.sep;
 
     this.fs.copyTpl(
       this.templatePath("template-post.md"),
@@ -95,11 +93,8 @@ module.exports = class extends Generator {
       {
         title: title,
         tags: kebabTags,
-        comments: this.props.comments
+        comments: this.answers.comments
       }
     );
-  }
-
-  install() {
   }
 };

@@ -27,10 +27,11 @@
     "lint-staged": "^9.4.3",
     "prettier": "^1.19.1",
     "yeoman-assert": "^3.1.0",
-    "yeoman-test": "^7.1.0"
+    "yeoman-test": "^5.0.0"
   },
   "engines": {
-    "npm": ">= 14.0.0"
+    "npm": ">= 4.0.0",
+    "node": ">=10"
   },
   "dependencies": {
     "chalk": "^2.4.2",
