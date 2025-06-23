@@ -37,7 +37,7 @@
     "inquirer-datepicker-prompt": "^0.4.2",
     "moment": "^2.29.4",
     "yeoman-generator": "^7.5.1",
-    "yosay": "^2.0.1"
+    "yosay": "^3.0.0"
   },
   "jest": {
     "testEnvironment": "node"
